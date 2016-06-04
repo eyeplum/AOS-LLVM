@@ -43,7 +43,8 @@ let slides = Slides(pages: [
   ]),
 
   Page(title: "Swift and LLVM", bulletPoints: [
-    "placeholder",
+    "Chris Lattner:",
+    "  Swift is really just a syntax sugar for LLVM IR.",
   ]),
 
   Page(title: "Use LLVM as a Library", bulletPoints: [
