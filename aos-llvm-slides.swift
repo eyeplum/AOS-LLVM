@@ -50,7 +50,7 @@ let slides = Slides(pages: [
     "placeholder",
   ]),
 
-  Cover(title: "Who's next?", bulletPoints: []),
+  Cover(title: "Who's next?", bulletPoints: [":trollface:"]),
 
 ])
 
