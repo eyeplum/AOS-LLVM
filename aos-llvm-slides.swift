@@ -2,6 +2,11 @@ let slides = Slides(pages: [
 
   Cover(title: "The Architecture of LLVM", bulletPoints: ["yan.li@ef.com"]),  
 
+  Image(title: "LLVM-logo.png", bulletPoints: [
+    "竜神の剣を喰らえ",
+    "Ryūjin no ken o kurae",
+  ]),
+
   Page(title: "What is LLVM?", bulletPoints: [
     "The name LLVM was once an acronym for:",
     "  Low Level Virtual Machine",
@@ -50,6 +55,8 @@ let slides = Slides(pages: [
   Page(title: "Use LLVM as a Library", bulletPoints: [
     "placeholder",
   ]),
+
+  Cover(title: "Q&A", bulletPoints: []),
 
   Cover(title: "Who's next?", bulletPoints: [":trollface:"]),
 
