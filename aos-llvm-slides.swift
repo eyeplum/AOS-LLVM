@@ -50,8 +50,20 @@ let slides = Slides(pages: [
   ]),
 
   Page(title: "LLVM IR", bulletPoints: [
-    "placeholder",
+    "A low-level RISC-like virtual instruction set",
+    "Strongly typed",
+    "Uses temporaries with a % prefix",
+    "  Rather than %rax, %rbp, %rip, etc",
+    "Three forms of LLVM IR",
+    "  Textual format: file_name.ll",
+    "  In-memory data structure",
+    "  Binary format (bitcode): file_name.bc",
+    "No programming language or target constraints",
+    "Good for the optimizer to do its job",
+    "  Source code -> Frontend -> IR -> Optimizer -> Backend -> Binary",
   ]),
+
+  Cover(title: "clang -S -emit-ir", bulletPoints: ["An example of LLVM IR"]),
 
   Page(title: "LLVM's Three-Phase Compiler Design", bulletPoints: [
     "placeholder",
