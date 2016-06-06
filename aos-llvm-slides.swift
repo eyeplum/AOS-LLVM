@@ -55,40 +55,81 @@ let slides = Slides(pages: [
     "Uses temporaries with a % prefix",
     "  Rather than %rax, %rbp, %rip, etc",
     "Three forms of LLVM IR",
-    "  Textual format: file_name.ll",
+    "  Textual format (.ll)",
     "  In-memory data structure",
-    "  Binary format (bitcode): file_name.bc",
+    "  Binary format, bitcode (.bc)",
     "No programming language or target constraints",
     "Good for the optimizer to do its job",
-    "  Source code -> Frontend -> IR -> Optimizer -> Backend -> Binary",
   ]),
 
   Cover(title: "clang -S -emit-ir", bulletPoints: ["An example of LLVM IR"]),
 
+  Image(title: "images/LLVMCompiler.png", bulletPoints: [
+    "LLVM's Three-Phase Compiler Design",
+  ]),
+
   Page(title: "LLVM's Three-Phase Compiler Design", bulletPoints: [
-    "placeholder",
+    "Frontend",
+    "  Source code -> Parsing and Emit Errors -> AST",
+    "  AST -> LLVM IR",
+    "Optimizer",
+    "  LLVM IR -> Optimization Passes -> LLVM IR",
+    "Backend",
+    "  LLVM IR -> Code Generator -> Instructions",
+  ]),
+
+  Page(title: "IR is a complete representation", bulletPoints: [
+    "In practice",
+    "  -> Frontend -> LLVM IR",
+    "  -> Unix Pipline",
+    "  -> Optimizer Sequence -> Code Generator",
+    "IR represents everything in the code",
+    "GCC GIMPLE references back to the source level tree data",
+  ]),
+
+  Page(title: "LLVM is a collection of libs", bulletPoints: [
+    "Optimization Passes",
+    "  IR -> Pass -> .. -> Pass -> IR",
+    "  -O0, no passes",
+    "  -O3, 67 passes",
+    "Written in C++, built into static libs",
+    "Can be referenced by a minimum subset",
   ]),
 
   Page(title: "The LLVM Code Generator", bulletPoints: [
-    "placeholder",
+    "Collect target infos into a target description file (.td)",
+    ".td -> Assembler/Disassembler",
+    "  IR -> Assembler -> Machine Code",
+    "x86_64.td -> x86_64_assembler",
+    "  IR -> x86_64_assembler -> x86_64 executable"
   ]),
 
   Page(title: "Extra Benefits of the Design", bulletPoints: [
-    "placeholder",
+    "Link time optimization",
+    "Install time optimization",
+    "  Apple App Thinning",
+    "Unit testing",
   ]),
 
-  Page(title: "Future Directions", bulletPoints: [
-    "placeholder",
+  Page(title: "Retrospective and the Future", bulletPoints: [
+    "The design was developed by self-defense",
+    "The API changes often without backwards compatibility",
+    "  Swift",
+    "Make things more modular",
+    "  Code Generator",
   ]),
 
   Page(title: "Swift and LLVM", bulletPoints: [
     "Chris Lattner:",
     "  Swift is really just a syntax sugar for LLVM IR.",
+    "SIL, Swift Intermediate Language",
+    "  Higher level than LLVM IR, more sementically aware",
+    "  Enables more useful diagnoses and optimizations",
+    "*.swift -> Parser -> AST -> SIL -> IR -> *.o",
+    "  Encourages more language-specific IR (e.g. C++)",
   ]),
 
-  Page(title: "Use LLVM as a Library", bulletPoints: [
-    "placeholder",
-  ]),
+  Cover(title: "swiftc -emit-sil", bulletPoints: ["An Example of SIL"]),
 
   Cover(title: "Q&A", bulletPoints: []),
 
