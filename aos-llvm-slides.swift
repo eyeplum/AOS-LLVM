@@ -49,6 +49,20 @@ let slides = Slides(pages: [
     "  This is due to some architectural problems from its early design",
   ]),
 
+  Image(title: "images/LLVMCompiler.png", bulletPoints: [
+    "LLVM's Three-Phase Compiler Design",
+  ]),
+
+  Page(title: "LLVM's Three-Phase Compiler Design", bulletPoints: [
+    "Frontend",
+    "  Source code -> Parsing and Emit Errors -> AST",
+    "  AST -> LLVM IR",
+    "Optimizer",
+    "  LLVM IR -> Optimization Passes -> LLVM IR",
+    "Backend",
+    "  LLVM IR -> Code Generator -> Instructions",
+  ]),
+
   Page(title: "LLVM IR", bulletPoints: [
     "A low-level RISC-like virtual instruction set",
     "Strongly typed",
@@ -64,27 +78,13 @@ let slides = Slides(pages: [
 
   Cover(title: "clang -S -emit-ir", bulletPoints: ["An example of LLVM IR"]),
 
-  Image(title: "images/LLVMCompiler.png", bulletPoints: [
-    "LLVM's Three-Phase Compiler Design",
-  ]),
-
-  Page(title: "LLVM's Three-Phase Compiler Design", bulletPoints: [
-    "Frontend",
-    "  Source code -> Parsing and Emit Errors -> AST",
-    "  AST -> LLVM IR",
-    "Optimizer",
-    "  LLVM IR -> Optimization Passes -> LLVM IR",
-    "Backend",
-    "  LLVM IR -> Code Generator -> Instructions",
-  ]),
-
   Page(title: "IR is a complete representation", bulletPoints: [
+    "IR represents everything in the code",
+    "  GCC GIMPLE references back to the source level tree data",
     "In practice",
     "  -> Frontend -> LLVM IR",
     "  -> Unix Pipline",
     "  -> Optimizer Sequence -> Code Generator",
-    "IR represents everything in the code",
-    "GCC GIMPLE references back to the source level tree data",
   ]),
 
   Page(title: "LLVM is a collection of libs", bulletPoints: [
