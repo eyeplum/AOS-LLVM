@@ -1,0 +1,94 @@
+sil_stage canonical
+
+import Builtin
+import Swift
+import SwiftShims
+
+// hello.a : Swift.Int
+sil_global [let] @_Tv5hello1aSi : $Int
+
+// hello.b : Swift.Int
+sil_global [let] @_Tv5hello1bSi : $Int
+
+// hello.result : Swift.Int
+sil_global [let] @_Tv5hello6resultSi : $Int
+
+// static Swift.Process._argc : Swift.Int32
+sil_global [fragile] @_TZvOs7Process5_argcVs5Int32 : $Int32
+
+// globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_token5
+sil_global private_external [fragile] @globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_token5 : $Builtin.Word
+
+// static Swift.Process._unsafeArgv : Swift.UnsafeMutablePointer<Swift.UnsafeMutablePointer<Swift.Int8>>
+sil_global [fragile] @_TZvOs7Process11_unsafeArgvGSpGSpVs4Int8__ : $UnsafeMutablePointer<UnsafeMutablePointer<Int8>>
+
+// main
+sil @main : $@convention(c) (Int32, UnsafeMutablePointer<UnsafeMutablePointer<Int8>>) -> Int32 {
+// %0                                             // user: %3
+// %1                                             // user: %9
+bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<UnsafeMutablePointer<Int8>>):
+  %2 = global_addr @_TZvOs7Process5_argcVs5Int32 : $*Int32 // user: %3
+  store %0 to %2 : $*Int32                        // id: %3
+  %4 = global_addr @globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_token5 : $*Builtin.Word // user: %5
+  %5 = address_to_pointer %4 : $*Builtin.Word to $Builtin.RawPointer // user: %7
+  // function_ref globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_func5
+  %6 = function_ref @globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_func5 : $@convention(thin) () -> () // user: %7
+  %7 = builtin "once"(%5 : $Builtin.RawPointer, %6 : $@convention(thin) () -> ()) : $()
+  %8 = global_addr @_TZvOs7Process11_unsafeArgvGSpGSpVs4Int8__ : $*UnsafeMutablePointer<UnsafeMutablePointer<Int8>> // user: %9
+  store %1 to %8 : $*UnsafeMutablePointer<UnsafeMutablePointer<Int8>> // id: %9
+  %10 = tuple ()
+  alloc_global @_Tv5hello1aSi                     // id: %11
+  %12 = global_addr @_Tv5hello1aSi : $*Int        // users: %15, %24
+  %13 = integer_literal $Builtin.Int64, 3         // user: %14
+  %14 = struct $Int (%13 : $Builtin.Int64)        // user: %15
+  store %14 to %12 : $*Int                        // id: %15
+  alloc_global @_Tv5hello1bSi                     // id: %16
+  %17 = global_addr @_Tv5hello1bSi : $*Int        // users: %20, %25
+  %18 = integer_literal $Builtin.Int64, 4         // user: %19
+  %19 = struct $Int (%18 : $Builtin.Int64)        // user: %20
+  store %19 to %17 : $*Int                        // id: %20
+  alloc_global @_Tv5hello6resultSi                // id: %21
+  %22 = global_addr @_Tv5hello6resultSi : $*Int   // user: %27
+  // function_ref hello.add (Swift.Int, b : Swift.Int) -> Swift.Int
+  %23 = function_ref @_TF5hello3addFTSi1bSi_Si : $@convention(thin) (Int, Int) -> Int // user: %26
+  %24 = load %12 : $*Int                          // user: %26
+  %25 = load %17 : $*Int                          // user: %26
+  %26 = apply %23(%24, %25) : $@convention(thin) (Int, Int) -> Int // user: %27
+  store %26 to %22 : $*Int                        // id: %27
+  %28 = integer_literal $Builtin.Int32, 0         // user: %29
+  %29 = struct $Int32 (%28 : $Builtin.Int32)      // user: %30
+  return %29 : $Int32                             // id: %30
+}
+
+// Swift._didEnterMain (Swift.Int32, argv : Swift.UnsafeMutablePointer<Swift.UnsafeMutablePointer<Swift.Int8>>) -> ()
+sil [transparent] [fragile] @_TFs13_didEnterMainFTVs5Int324argvGSpGSpVs4Int8___T_ : $@convention(thin) (Int32, UnsafeMutablePointer<UnsafeMutablePointer<Int8>>) -> ()
+
+// hello.add (Swift.Int, b : Swift.Int) -> Swift.Int
+sil hidden @_TF5hello3addFTSi1bSi_Si : $@convention(thin) (Int, Int) -> Int {
+// %0                                             // users: %2, %4
+// %1                                             // users: %3, %5
+bb0(%0 : $Int, %1 : $Int):
+  debug_value %0 : $Int, let, name "a", argno 1   // id: %2
+  debug_value %1 : $Int, let, name "b", argno 2   // id: %3
+  %4 = struct_extract %0 : $Int, #Int._value      // user: %7
+  %5 = struct_extract %1 : $Int, #Int._value      // user: %7
+  %6 = integer_literal $Builtin.Int1, -1          // user: %7
+  %7 = builtin "sadd_with_overflow_Int64"(%4 : $Builtin.Int64, %5 : $Builtin.Int64, %6 : $Builtin.Int1) : $(Builtin.Int64, Builtin.Int1) // users: %8, %9
+  %8 = tuple_extract %7 : $(Builtin.Int64, Builtin.Int1), 0 // user: %11
+  %9 = tuple_extract %7 : $(Builtin.Int64, Builtin.Int1), 1 // user: %10
+  cond_fail %9 : $Builtin.Int1                    // id: %10
+  %11 = struct $Int (%8 : $Builtin.Int64)         // user: %12
+  return %11 : $Int                               // id: %12
+}
+
+// static Swift.+ infix (Swift.Int, Swift.Int) -> Swift.Int
+sil [transparent] [fragile] @_TZFsoi1pFTSiSi_Si : $@convention(thin) (Int, Int) -> Int
+
+// Swift.Int.init (_builtinIntegerLiteral : Builtin.Int2048) -> Swift.Int
+sil [transparent] [fragile] @_TFSiCfT22_builtinIntegerLiteralBi2048__Si : $@convention(thin) (Builtin.Int2048, @thin Int.Type) -> Int
+
+// globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_func5
+sil private_external [fragile] @globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_func5 : $@convention(thin) () -> ()
+
+
+
