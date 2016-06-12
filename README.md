@@ -4,7 +4,7 @@ A study group presentation about: The Architecture of Open Source Applications -
 
 ## What's this
 
-This is a presentation project that can be opened by a soon-to-be-released tool.
+This is a presentation project that can be opened by [Truffaut](http://eyeplum.github.io/citadel/index.html).
 
-If your are curious about the contents, you can checkout [aos-llvm-slides.swift](aos-llvm-slides.swift).
+If your are curious about the format, you can checkout [aos-llvm-slides.swift](aos-llvm-slides.swift).
 
